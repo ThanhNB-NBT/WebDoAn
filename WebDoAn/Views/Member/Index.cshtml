@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Thành viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <main id="main">
+
+        <!-- ======= Our Team Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Our Team</h2>
+                    <ol>
+                        <li><a href="index.html">Home</a></li>
+                        <li>Our Team</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section><!-- End Our Team Section -->
+        @await Component.InvokeAsync("MemberView")
+
+    </main><!-- End #main -->
+</body>
+</html>
+
