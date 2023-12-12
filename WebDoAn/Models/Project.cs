@@ -14,5 +14,10 @@ namespace WebDoAn.Models
         public string? Category { get; set; }
         public string? Image { get; set; }
         public bool IsActive { get; set; }
+        public string? Title { get; set; }
+        public string? Detail { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string? Client { get; set; }
+        public string? Link { get; set; }
     }
 }

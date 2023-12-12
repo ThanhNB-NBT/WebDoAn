@@ -3,7 +3,7 @@
 
 @foreach( var pr in Model)
 {
-    string url = Function.TitleSlugGeneration("project",pr.ProjectName, pr.ProjectId);
+    string url = Function.TitleSlugGeneration("Projects",pr.ProjectName, pr.ProjectId);
     <div class="col-lg-4 col-md-6 portfolio-wrap filter-app">
          <div class="portfolio-item">
             <img src="~/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">

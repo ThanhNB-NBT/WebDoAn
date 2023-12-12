@@ -1,8 +1,7 @@
-﻿@model ProjectDetail
+﻿@model Project
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.ProjectName.ToString();
     Layout = "~/Views/Shared/_Layout.cshtml";
-    List<Project> projects = ViewBag.projects;
 }
 
 <html>
@@ -18,11 +17,11 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Portfolio Details</h2>
+                    <h2>Dự án</h2>
                     <ol>
-                        <li><a href="~/Home">Home</a></li>
-                        <li><a href="~/Project">Portfolio</a></li>
-                        <li>Portfolio Details</li>
+                        <li><a href="~/Home">Trang chủ</a></li>
+                        <li><a href="~/Projects">Dự án</a></li>
+                        <li>@Model.ProjectName</li>
                     </ol>
                 </div>
 
@@ -57,18 +56,18 @@
 
                     <div class="col-lg-4">
                         <div class="portfolio-info">
-                            <h3>Project information</h3>
+                            <h3>@Model.ProjectName</h3>
                             <ul>
-                                <li><strong>Category</strong>: Web design</li>
-                                <li><strong>Client</strong>: ASU Company</li>
-                                <li><strong>Project date</strong>: 01 March, 2020</li>
-                                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                                <li><strong>Category</strong>: @Model.Category</li>
+                                <li><strong>Client</strong>: @Model.Client </li>
+                                <li><strong>Project date</strong>: @Model.CreatedDate.ToString("dd/mm/yyyy")</li>
+                                <li><strong>Project URL</strong>: <a href="#">@Model.Link</a></li>
                             </ul>
                         </div>
                         <div class="portfolio-description">
-                            <h2>This is an example of portfolio detail</h2>
+                            <h2>@Model.Title</h2>
                             <p>
-                                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+                                @Model.Detail
                             </p>
                         </div>
                     </div>

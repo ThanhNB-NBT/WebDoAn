@@ -27,13 +27,13 @@ namespace WebDoAn.Controllers
             {
                 return NotFound();
             }
-            var projectDetails = _context.Projects.FirstOrDefault(p => (p.ProjectId == id) && (p.IsActive == true));
-            if (projectDetails == null)
+            var Details = _context.Projects.Where(i => i.ProjectId == id && i.IsActive).FirstOrDefault();
+            if (Details == null)
             {
                 return NotFound();
             }
-            
-            return View(projectDetails);
+           
+            return View(Details);
         }
     }
 }
