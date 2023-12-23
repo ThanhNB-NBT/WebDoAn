@@ -10,7 +10,7 @@ namespace WebDoAn.Models
         [Key]
         public int AboutID { get; set; }
         public string? Title { get; set; }
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
         public string? AboutUs { get; set; }      
         public string? OurStory { get; set; }
         public string? Image { get; set; }

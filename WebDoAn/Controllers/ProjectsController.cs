@@ -5,11 +5,8 @@ namespace WebDoAn.Controllers
 {
     public class ProjectsController : Controller
     {
-#pragma warning disable S4487 // Unread "private" fields should be removed
         private readonly ILogger<ProjectsController> _logger;
-#pragma warning restore S4487 // Unread "private" fields should be removed
         private readonly DataContext _context;
-
         public ProjectsController(ILogger<ProjectsController> logger, DataContext context)
         {
             _logger = logger;

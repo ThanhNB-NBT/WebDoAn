@@ -10,7 +10,7 @@ namespace WebDoAn.Models
         [Key]
         public int MemberID { get; set; }
         public string? Name { get; set; }
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
         public string? WorkPosition { get; set; }
         public string? Detail { get; set; }
         public string? Link { get; set; }

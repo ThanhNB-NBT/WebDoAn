@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebDoAn.Models.Member>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class=" d-flex align-items-stretch">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold">Quản lí thành viên</h5>
+                <p>
+                    <a asp-action="Create" class="btn btn-primary mb-3">Thêm mới</a>
+                </p>
+                <div class="table-responsive">
+                    <table class="table text-nowrap mb-0 align-middle">
+                        <table class="table">
+                            <thead class="text-dark fs-4">
+                                <tr>
+                                    <th >STT</th>
+                                    <th >Họ và tên</th>
+                                    <th >Vị trí làm việc</th>
+                                    <th >Chi tiết</th>
+                                    <th >Link</th>
+                                    <th >Lời nhắn</th>
+                                    <th >Hình ảnh</th>
+                                    <th >Hiển thị</th>
+                                    <th ></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int i = 1;
+                                }
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@(i++)</td>
+                                        <td> @item.Name</td>
+                                        <td> @item.WorkPosition</td>
+                                        <td> @item.Detail</td>
+                                        <td> @item.Link</td>
+                                        <td> @item.Message</td>
+                                        <td>
+                                            <img style="max-width: 30px;height: auto;" src="@item.Image" />
+                                        </td>
+                                        <td > @Html.CheckBox("true", @item.IsActive)</td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.MemberID" class="btn btn-danger btn-sm">Sửa</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.MemberID" data-id="@item.MemberID" class="btn btn-warning btn-sm">Xóa</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

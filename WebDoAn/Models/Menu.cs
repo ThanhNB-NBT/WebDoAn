@@ -10,7 +10,7 @@ namespace WebDoAn.Models
         [Key]
         public int MenuID { get; set; }
         public string? MenuName { get; set; }
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
         public string? ControllerName { get; set; }
         public string? ActionName { get; set; }
         public int Levels { get; set; }

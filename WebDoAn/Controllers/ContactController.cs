@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebDoAn.Models;
+
 namespace WebDoAn.Controllers
 {
     public class ContactController : Controller
