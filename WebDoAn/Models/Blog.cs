@@ -19,6 +19,11 @@ namespace WebDoAn.Models
         public string? CreatedBy { get; set; }
         public bool IsActive { get; set; }
         public string? Tags {  get; set; }
-        public string? Category {  get; set; }
+        public int? CategoryId {  get; set; }
+        //public virtual Account? Account { get; set; }
+
+        public virtual Category? Category { get; set; }
+
+        public virtual ICollection<BlogComment> TbBlogComments { get; set; } = new List<BlogComment>();
     }
 }

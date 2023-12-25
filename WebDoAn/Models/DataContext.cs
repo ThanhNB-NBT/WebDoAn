@@ -24,6 +24,7 @@ namespace WebDoAn.Models
         public DbSet<Project> Projects { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogComment> BlogComments { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<AdminMenu> AdminMenus { get; set; }
     }
 }

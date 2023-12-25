@@ -10,88 +10,87 @@ using WebDoAn.Models;
 namespace WebDoAn.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class BlogsController : Controller
+    public class ProjectsController : Controller
     {
         private readonly DataContext _context;
 
-        public BlogsController(DataContext context)
+        public ProjectsController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/Blogs
+        // GET: Admin/Projects
         public async Task<IActionResult> Index()
         {
-            var blogs = _context.Blogs.Include(b => b.Category).ToList();
-            return _context.Blogs != null ? 
-                          View(await _context.Blogs.ToListAsync()) :
-                          Problem("Entity set 'DataContext.Blogs'  is null.");
+              return _context.Projects != null ? 
+                          View(await _context.Projects.ToListAsync()) :
+                          Problem("Entity set 'DataContext.Projects'  is null.");
         }
 
-        // GET: Admin/Blogs/Details/5
+        // GET: Admin/Projects/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Blogs == null)
+            if (id == null || _context.Projects == null)
             {
                 return NotFound();
             }
 
-            var blog = await _context.Blogs
-                .FirstOrDefaultAsync(m => m.BlogID == id);
-            if (blog == null)
+            var project = await _context.Projects
+                .FirstOrDefaultAsync(m => m.ProjectId == id);
+            if (project == null)
             {
                 return NotFound();
             }
 
-            return View(blog);
+            return View(project);
         }
 
-        // GET: Admin/Blogs/Create
+        // GET: Admin/Projects/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Blogs/Create
+        // POST: Admin/Projects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlogID,Title,Alias,Description,Detail,Image,CreatedDate,CreatedBy,IsActive,Tags,CategoryId")] Blog blog)
+        public async Task<IActionResult> Create([Bind("ProjectId,ProjectName,Category,Image,IsActive,Title,Detail,CreatedDate,Client,Link")] Project project)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(blog);
+                _context.Add(project);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(blog);
+            return View(project);
         }
 
-        // GET: Admin/Blogs/Edit/5
+        // GET: Admin/Projects/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Blogs == null)
+            if (id == null || _context.Projects == null)
             {
                 return NotFound();
             }
 
-            var blog = await _context.Blogs.FindAsync(id);
-            if (blog == null)
+            var project = await _context.Projects.FindAsync(id);
+            if (project == null)
             {
                 return NotFound();
             }
-            return View(blog);
+            return View(project);
         }
 
-        // POST: Admin/Blogs/Edit/5
+        // POST: Admin/Projects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BlogID,Title,Alias,Description,Detail,Image,CreatedDate,CreatedBy,IsActive,Tags,CategoryId")] Blog blog)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjectId,ProjectName,Category,Image,IsActive,Title,Detail,CreatedDate,Client,Link")] Project project)
         {
-            if (id != blog.BlogID)
+            if (id != project.ProjectId)
             {
                 return NotFound();
             }
@@ -100,12 +99,12 @@ namespace WebDoAn.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(blog);
+                    _context.Update(project);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BlogExists(blog.BlogID))
+                    if (!ProjectExists(project.ProjectId))
                     {
                         return NotFound();
                     }
@@ -116,49 +115,49 @@ namespace WebDoAn.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(blog);
+            return View(project);
         }
 
-        // GET: Admin/Blogs/Delete/5
+        // GET: Admin/Projects/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Blogs == null)
+            if (id == null || _context.Projects == null)
             {
                 return NotFound();
             }
 
-            var blog = await _context.Blogs
-                .FirstOrDefaultAsync(m => m.BlogID == id);
-            if (blog == null)
+            var project = await _context.Projects
+                .FirstOrDefaultAsync(m => m.ProjectId == id);
+            if (project == null)
             {
                 return NotFound();
             }
 
-            return View(blog);
+            return View(project);
         }
 
-        // POST: Admin/Blogs/Delete/5
+        // POST: Admin/Projects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Blogs == null)
+            if (_context.Projects == null)
             {
-                return Problem("Entity set 'DataContext.Blogs'  is null.");
+                return Problem("Entity set 'DataContext.Projects'  is null.");
             }
-            var blog = await _context.Blogs.FindAsync(id);
-            if (blog != null)
+            var project = await _context.Projects.FindAsync(id);
+            if (project != null)
             {
-                _context.Blogs.Remove(blog);
+                _context.Projects.Remove(project);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BlogExists(int id)
+        private bool ProjectExists(int id)
         {
-          return (_context.Blogs?.Any(e => e.BlogID == id)).GetValueOrDefault();
+          return (_context.Projects?.Any(e => e.ProjectId == id)).GetValueOrDefault();
         }
     }
 }
