@@ -9,12 +9,12 @@ File: js
 // ==============================================================
 $(function () {
     "use strict";
-    var url = window.location + "";
-    var path = url.replace(
+    let url = window.location + "";
+    let path = url.replace(
       window.location.protocol + "//" + window.location.host + "/",
       ""
     );
-    var element = $("ul#sidebarnav a").filter(function () {
+    let element = $("ul#sidebarnav a").filter(function () {
       return this.href === url || this.href === path; // || url.href.indexOf(this.href) === 0;
     });
     element.parentsUntil(".sidebar-nav").each(function (index) {

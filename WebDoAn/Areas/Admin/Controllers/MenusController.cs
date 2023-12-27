@@ -48,6 +48,9 @@ namespace WebDoAn.Areas.Admin.Controllers
         // GET: Admin/Menus/Create
         public IActionResult Create()
         {
+            ViewData["ControllerNames"] = _context.Menus.Select(m => m.ControllerName).Distinct().ToList();
+            var menuNames = _context.Menus.Select(m => new SelectListItem { Value = m.MenuID.ToString(), Text = m.MenuName }).ToList();
+            ViewData["MenuNames"] = menuNames;
             return View();
         }
 
@@ -80,6 +83,9 @@ namespace WebDoAn.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            ViewData["ControllerNames"] = _context.Menus.Select(m => m.ControllerName).Distinct().ToList();
+            var menuNames = _context.Menus.Select(m => new SelectListItem { Value = m.MenuID.ToString(), Text = m.MenuName }).ToList();
+            ViewData["MenuNames"] = menuNames;
             return View(menu);
         }
 

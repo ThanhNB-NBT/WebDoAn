@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using WebDoAn.Models;
 
 namespace WebDoAn.Areas.Admin.Controllers
@@ -37,6 +39,7 @@ namespace WebDoAn.Areas.Admin.Controllers
             }
 
             var blog = await _context.Blogs
+                .Include(b => b.Category)
                 .FirstOrDefaultAsync(m => m.BlogID == id);
             if (blog == null)
             {
@@ -49,6 +52,9 @@ namespace WebDoAn.Areas.Admin.Controllers
         // GET: Admin/Blogs/Create
         public IActionResult Create()
         {
+            // Lọc bỏ các bản ghi có IsActive không phải là null
+            var categories = _context.Categories.Where(c => c.IsActive != null).ToList();
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
             return View();
         }
 
@@ -65,6 +71,7 @@ namespace WebDoAn.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", blog.CategoryId);
             return View(blog);
         }
 
@@ -81,6 +88,7 @@ namespace WebDoAn.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", blog.CategoryId);
             return View(blog);
         }
 
@@ -116,6 +124,7 @@ namespace WebDoAn.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", blog.CategoryId);
             return View(blog);
         }
 

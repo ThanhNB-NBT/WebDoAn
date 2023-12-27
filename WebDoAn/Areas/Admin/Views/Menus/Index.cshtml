@@ -11,6 +11,9 @@
             <div class="card w-100">
                 <div class="card-body p-4">
                     <h5 class="card-title fw-semibold mb-4">Quản lý Menu</h5>
+                    <div id="deleteAlert" class="alert" role="alert" style="display: none;">
+                        <!-- Nội dung của thông báo sẽ được cập nhật bằng mã JavaScript -->
+                    </div>
                     <div class="table-responsive">
                         <table class="table text-nowrap mb-0 align-middle">
                             <thead class="text-dark fs-4">
@@ -83,13 +86,15 @@
                                             <h6 class="fw-semibold mb-0">@item.Position</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <a asp-action="Edit" asp-route-id="@item.MenuID" class="btn btn-danger btn-sm">Sửa</a> |
-                                            <a asp-action="Details" asp-route-id="@item.MenuID" class="btn btn-info btn-sm">Chi tiết</a> |
-                                            <a asp-action="Delete" asp-route-id="@item.MenuID" data-id="@item.MenuID" class="btn btn-warning btn-sm">Xóa</a>
+                                            <a asp-action="Edit" asp-route-id="@item.MenuID" class="btn btn-danger btn-sm btn-edit">Sửa</a> |
+                                            <a asp-action="Details" asp-route-id="@item.MenuID" class="btn btn-info btn-sm btn-detail">Chi tiết</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.MenuID" data-id="@item.MenuID" class="btn btn-warning btn-sm btn-delete">Xóa</a>
+                                            @Html.AntiForgeryToken()
                                         </td>
                                     </tr>
                                 }
                             </tbody>
+                            
                         </table>
                         <p>
                             <a asp-action="Create" class="btn btn-primary mb-3">Thêm mới</a>
@@ -100,5 +105,85 @@
         </div>
     </div>
 </div>
+@* @section Scripts {
+    <script>
+        $(".btn-delete").click(function (e) {
+            _id = $(this).data("id");
+            var deleteAlert = $("#deleteAlert");
+            if (confirm("Bạn có muốn xóa không")) {
+                $.ajax({
+                    url: "/Admin/Menus/Delete/",
+                    type: "POST",
+                    data: { id: _id },
+                    success: function (result) {
+                            if (result) {
+                                $("#tr_" + _id).remove();
+                                deleteAlert.addClass("alert-success");
+                                deleteAlert.text('Xóa thành công');
+                            } else {
+                                deleteAlert.addClass("alert-danger");
+                                deleteAlert.text('Xóa không thành công');
+                            }
+                            // Hiển thị thông báo
+                            deleteAlert.show();
+
+                            // Ẩn thông báo sau khoảng thời gian
+                            setTimeout(function () {
+                                deleteAlert.hide();
+                            }, 2000); // 2000 milliseconds (2 seconds)
+                        }
+                    });
+            }
+            return false;
+        });
+    </script>
+} *@
+
+@* @section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(".btn-delete").click(function (e) {
+                e.preventDefault();// Ngăn chặn hành động mặc định của nút submit
+                _id = $(this).data("id");
+                var deleteAlert = $("#deleteAlert");
+
+                if (confirm("Bạn có muốn xóa không")) {
+                    $.ajax({
+                        url: "/admin/menus/delete",
+                        type: "POST",
+                        data: { id: _id },
+                        success: function (result) {
+                            if (result) {
+                                $("#tr_" + _id).remove();
+
+                                // Cập nhật và hiển thị thông báo thành công
+                                updateAndShowAlert(deleteAlert, 'alert-success', 'Xóa thành công');
+                            } else {
+                                // Cập nhật và hiển thị thông báo thất bại
+                                updateAndShowAlert(deleteAlert, 'alert-warning', 'Xóa không thành công');
+                            }
+                        },
+                        error: function () {
+                            // Cập nhật và hiển thị thông báo lỗi
+                            updateAndShowAlert(deleteAlert, 'alert-danger', 'Đã xảy ra lỗi khi xóa menu.');
+                        }
+                    });
+                }
+            });
+
+            // Hàm cập nhật và hiển thị thông báo
+            function updateAndShowAlert(alertElement, alertClass, alertText) {
+                alertElement.removeClass("alert-danger alert-success").addClass(alertClass);
+                alertElement.html('<strong>' + alertText + '</strong>');
+                alertElement.fadeIn();
+
+                // Ẩn thông báo sau 3 giây
+                setTimeout(function () {
+                    alertElement.fadeOut();
+                }, 3000);
+            }
+        });
+    </script>
+} *@
 
 

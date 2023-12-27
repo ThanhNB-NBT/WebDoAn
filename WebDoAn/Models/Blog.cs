@@ -22,7 +22,7 @@ namespace WebDoAn.Models
         public int? CategoryId {  get; set; }
         //public virtual Account? Account { get; set; }
 
-        public virtual Category? Category { get; set; }
+        public virtual Category Category { get; set; }
 
         public virtual ICollection<BlogComment> TbBlogComments { get; set; } = new List<BlogComment>();
     }
