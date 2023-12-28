@@ -5,10 +5,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modernize Free</title>
+    <title>Modernize</title>
     <link rel="shortcut icon" type="image/png" href="~/admin/assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="~/admin/assets/css/styles.min.css" />
     <link rel="" href="~/admin/assets/libs/bootstrap/scss/_alert.scss"/>
+    <script src="~/admin/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="~/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/admin/assets/js/sidebarmenu.js"></script>
+    <script src="~/admin/assets/js/app.min.js"></script>
+    <script src="~/admin/assets/libs/simplebar/dist/simplebar.js"></script>
+
+    <link rel="stylesheet" href="~/admin/lib/jqueryui/themes/base/theme.css" />
+    <link rel="stylesheet" href="~/admin/lib/jqueryui/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="~/admin/lib/elfinder/css/elfinder.full.css" />
+    <link rel="stylesheet" href="~/admin/lib/elfinder/css/theme.min.css" />
+    <script src="~/admin/lib/jqueryui/jquery-ui.min.js"></script>
+    <script src="~/admin/lib/elfinder/js/elfinder.min.js"></script>
+    <script src="~/admin/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/admin/lib/jqueryui/jquery-ui.min.js"></script>
 </head>
 
 <body>
@@ -16,11 +30,7 @@
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
          data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            @await Component.InvokeAsync("AdminMenu")
-            <!-- End Sidebar scroll-->
-        </aside>
+        @await Component.InvokeAsync("AdminMenu")
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -73,14 +83,7 @@
             @RenderBody()
         </div>
     </div>
-    <script src="~/admin/assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="~/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/admin/assets/js/sidebarmenu.js"></script>
-    <script src="~/admin/assets/js/app.min.js"></script>
-    <script src="~/admin/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-    <script src="~/admin/assets/libs/simplebar/dist/simplebar.js"></script>
-    <script src="~/admin/assets/js/dashboard.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

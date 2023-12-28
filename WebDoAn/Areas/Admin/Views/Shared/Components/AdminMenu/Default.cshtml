@@ -1,41 +1,46 @@
 ﻿@using WebDoAn.Areas.Admin.Models;
 @model IList<AdminMenu>
 
-<div>
-    <div class="brand-logo d-flex align-items-center justify-content-between">
-        <a href="./index.html" class="text-nowrap logo-img">
-            <img src="~/admin/assets/images/logos/dark-logo.svg" width="180" alt="" />
-        </a>
-        <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-            <i class="ti ti-x fs-8"></i>
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div>
+        <div class="brand-logo d-flex align-items-center justify-content-between">
+            <a href="./index.html" class="text-nowrap logo-img">
+                <img src="~/admin/assets/images/logos/dark-logo.svg" width="180" alt="" />
+            </a>
+            <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                <i class="ti ti-x fs-8"></i>
+            </div>
         </div>
-    </div>
-    <!-- Sidebar navigation-->
-    <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-        <ul id="sidebarnav">
-            @foreach (var Item in Model.Where(m => m.ItemLevels == 1).OrderBy(n => n.ItemOrder))
-            {
-                var Pid = Item.MenuAdminId;
-                var sMenu = Model.Where(p => p.ParentLevels == Pid).OrderBy(p => p.ItemOrder).ToList();
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+            <ul id="sidebarnav">
+                @foreach (var Item in Model.Where(m => m.ItemLevels == 1).OrderBy(n => n.ItemOrder))
+                {
+                    var Pid = Item.MenuAdminId;
+                    var sMenu = Model.Where(p => p.ParentLevels == Pid).OrderBy(p => p.ItemOrder).ToList();
 
-                <li class="nav-small-cap">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">@Item.ItemName</span>
-                </li>
-                <li class="sidebar-item">
-                    @foreach (var sMn in sMenu)
-                    {
-                        <a class="sidebar-link" href="/@sMn.AreaName/@sMn.ControllerName/@sMn.ActionName" aria-expanded="false">
-                            <span>
-                                <i class="@sMn.Icon"></i>
-                            </span>
-                            <span class="hide-menu">@sMn.ItemName</span>
-                        </a>
-                    }
-                </li>
-            }
-        </ul>
-    </nav>
-    <!-- End Sidebar navigation -->
-</div>
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">@Item.ItemName</span>
+                    </li>
+                    <li class="sidebar-item">
+                        @foreach (var sMn in sMenu)
+                        {
+                            <a class="sidebar-link" href="/@sMn.AreaName/@sMn.ControllerName/@sMn.ActionName" aria-expanded="false">
+                                <span>
+                                    <i class="@sMn.Icon"></i>
+                                </span>
+                                <span class="hide-menu">@sMn.ItemName</span>
+                            </a>
+                        }
+                    </li>
+                }
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+
+    <!-- End Sidebar scroll-->
+</aside>
 

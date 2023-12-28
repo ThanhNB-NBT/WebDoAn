@@ -27,10 +27,15 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label asp-for="Image" class="control-label form-label"></label>
-                                <input asp-for="Image" class="form-control" />
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button type="button" class="btn btn-success m-1 form-label" onclick="openDialog()">Chọn hình ảnh</button>
+                                    </div>
+                                    <!-- /btn-group -->
+                                    <input type="text" class="form-control " id="file_input" asp-for="Image" aria-describedby="button-addon2">
+                                </div>
                                 <span asp-validation-for="Image" class="text-danger"></span>
                             </div>
-                            
                             <div class="form-group mb-3">
                                 <label asp-for="Title" class="control-label form-label"></label>
                                 <input asp-for="Title" class="form-control" />
@@ -38,8 +43,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label asp-for="Detail" class="control-label form-label"></label>
-                                <input asp-for="Detail" class="form-control" />
-                                <span asp-validation-for="Detail" class="text-danger"></span>
+                                <textarea asp-for="Detail" id="Detail" class="form-control"></textarea>
                             </div>
                             <div class="form-group mb-3">
                                 <label asp-for="CreatedDate" class="control-label form-label"></label>
@@ -75,3 +79,8 @@
         </div>
     </div>
 </div>
+
+@{
+    var summerNote = new WebDoAn.Areas.Admin.Models.SummerNote("#Detail");
+}
+<partial name="_SummerNote" model="summerNote"/>
